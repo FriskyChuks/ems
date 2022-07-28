@@ -1,0 +1,153 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Apartment List</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                        <!-- <li class="breadcrumb-item"><a href="#!">Tables</a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">  
+                                <!-- [ stiped-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>All Apartments</h5>
+                                            <span class="d-block m-t-5">
+                                                <!-- <button>See All</button> <button>Free Apartments</button><button>Assigned Apartments</button> -->
+                                            </span>
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="col-xl-12 col-md-12 m-b-30">
+                                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active show" id="profile-tab" data-toggle="tab"
+                                                            href="#business" role="tab" aria-controls="business" aria-selected="false">Business</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="residential-tab" data-toggle="tab" href="#residential" role="tab"
+                                                            aria-controls="residential" aria-selected="false">Residential</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="available-tab" data-toggle="tab" href="#available"
+                                                            role="tab" aria-controls="available" aria-selected="false">Available</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="taken-tab" data-toggle="tab" href="#taken"
+                                                            role="tab" aria-controls="taken" aria-selected="false">Taken</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="all-tab" data-toggle="tab" href="#all"
+                                                            role="tab" aria-controls="all" aria-selected="false">All</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content" id="myTabContent">
+                                                    <div class="tab-pane fade" id="residential" role="tabpanel" aria-labelledby="residential-tab">
+                                                        <table class="table table-hover">
+                                                            {% include 'apartments/snippets/apartment_list_template.html' with instances=with instances=residential_apartments %}
+                                                        </table>
+            
+                                                    </div>
+                                                    <div class="tab-pane fade active show" id="business" role="tabpanel"
+                                                            aria-labelledby="business-tab">
+                                                        <table class="table table-hover">
+                                                            {% include 'apartments/snippets/apartment_list_template.html' with instances=with instances=business_apartments %}
+                                                        </table>
+            
+                                                    </div>
+                                                    <div class="tab-pane fade" id="available" role="tabpanel"
+                                                            aria-labelledby="available-tab">
+                                                        <table class="table table-hover">
+                                                            {% include 'apartments/snippets/apartment_list_template.html' with instances=with instances=available %}
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="taken" role="tabpanel"
+                                                            aria-labelledby="taken-tab">
+                                                        <table class="table table-hover">
+                                                            {% include 'apartments/snippets/apartment_list_template.html' with instances=with instances=taken %}
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="all" role="tabpanel"
+                                                            aria-labelledby="all-tab">
+                                                        <table class="table table-hover">
+                                                            {% include 'apartments/snippets/apartment_list_template.html' with instances=with instances=apartments %}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>TITLE</th>
+                                                            <th>CATEGORY</th>
+                                                            <th>PHASE</th>
+                                                            <th>STREE</th>
+                                                            <th>COMPOUND</th>
+                                                            <th>FLAT NO</th>
+                                                            <th>ACTIONS</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for apartment in apartments %}
+                                                        <tr>
+                                                            <td>{{ forloop.counter }}</td>
+                                                            <td>{{apartment.apartment_type.title}}</td>
+                                                            <td>{{apartment.apartment_category|capfirst}}</td>
+                                                            <td>{{apartment.phase}}</td>
+                                                            <td>{{apartment.street.title}}</td>
+                                                            <td>{{apartment.compound}}</td>
+                                                            <td>{{apartment.flat_number}}</td>
+                                                            <td><a href="">Assign</a></td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- [ stiped-table ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

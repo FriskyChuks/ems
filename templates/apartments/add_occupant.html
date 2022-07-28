@@ -1,0 +1,110 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Profile {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<style>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+</style>
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Image</h5>
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <img src="{{ ASSETS_ROOT }}/images/apartments/sample.jpg"
+                                                 alt="No image found">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="d-flex align-items-left justify-content-center flex-column">
+                                                <div class="w-50 p-3">
+                                                    Apartment Info
+                                                </div>
+                                                <div class="text-center">
+                                                    <h4 class="font-weight-bold h6">{{apartment.apartment_type.title}}</h4>
+                                                    <p class="font-italic text-muted">
+                                                        A {{apartment.apartment_category|capfirst}} apartment loacted @
+                                                        phase {{apartment.phase}}, {{apartment.street.title}} street
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="small font-weight-light mt-4 text-center text-muted">
+                                                <form method="POST" class="row g-1 needs-validation" novalidate>
+                                                    {% csrf_token %}
+                                                    <div class="col-md-12">
+                                                      <label for="validationCustom02" class="form-label">Email address</label>
+                                                      <input name="email" type="text" class="form-control" 
+                                                      id="validationCustom02" placeholder="enter email of intending Occupant here" required>
+                                                      <div class="valid-feedback">
+                                                        Looks good!
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-12"><br></div>
+                                                    <div class="col-12">
+                                                      <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                                        <label class="form-check-label" for="invalidCheck">
+                                                          I am sure of my actions
+                                                        </label>
+                                                        <div class="invalid-feedback">
+                                                          You must agree before submitting.
+                                                        </div>
+                                                      </div>
+                                                    </div> 
+                                                    <div class="col-md-12"><br></div>
+                                                    <div class="col-12">
+                                                      <button class="btn btn-primary" type="submit">Create Apartment</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <a href="#" class="h6 text-muted d-block m-1"><i
+                                                        class="icon feather icon-facebook"></i></a>
+                                                <a href="#" class="h6 text-muted d-block m-1"><i
+                                                        class="icon feather icon-twitter"></i></a>
+                                                <a href="#" class="h6 text-muted d-block m-1"><i
+                                                        class="icon feather icon-instagram"></i></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+    {% include 'form_check.html' %}
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

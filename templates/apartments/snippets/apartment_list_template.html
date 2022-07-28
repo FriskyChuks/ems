@@ -1,0 +1,33 @@
+
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>TITLE</th>
+                <th>CATEGORY</th>
+                <th>PHASE</th>
+                <th>STREE</th>
+                <th>COMPOUND</th>
+                <th>FLAT NO</th>
+                <th>STATUS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for instance in instances %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{instance.apartment_type.title}}</td>
+                <td>{{instance.apartment_category|capfirst}}</td>
+                <td>{{instance.phase}}</td>
+                <td>{{instance.street.title}}</td>
+                <td>{{instance.compound}}</td>
+                <td>{{instance.flat_number}}</td>
+                <td>
+                    {{instance.status|capfirst}}
+                    {% if instance.status == 'free' %} <br>
+                        <a href="{% url 'add_occupant' instance.id %}"><b>Assign to Occupant</b></a>
+                    {% endif %}
+                </td>
+                <!-- <td><a href="">Assign</a></td> -->
+            </tr>
+            {% endfor %}
+        </tbody>

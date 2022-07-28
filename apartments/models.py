@@ -1,6 +1,3 @@
-from operator import mod
-from random import choices
-from secrets import choice
 from django.db import models
 
 from accounts.models import User

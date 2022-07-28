@@ -99,14 +99,15 @@ WSGI_APPLICATION = 'ems.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': '<ems>',
-        # 'USER': '<user_name>',
-        # 'PASSWORD': '<password>',
-        # 'HOST': 'localhost',
-        # 'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ems',
+        'USER': 'chuks',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 

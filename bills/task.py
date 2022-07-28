@@ -1,12 +1,13 @@
 from celery import shared_task
 
-from apartments.models import Apartment
+from apartments.models import Apartment, Occupant
 
 from .models import Bill
 
 @shared_task(bind=True)
 def create_bills_for_all(self):
-    apartments=Apartment.objects.all()
+    occupant=Occupant.objects.all()
+    apartments=Apartment.objects.filter(occupant__in=occupant)
     for apartment in apartments:
         for c in apartment.occupant_set.all():
             bill_obj=Bill.objects.create(user_id=c.occupant.id,status='billed',

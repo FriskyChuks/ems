@@ -1,7 +1,0 @@
-#TO RUN CELERY SERVER
-"celery -A app.celery worker -l info --pool=solo"
-e.g: [celery -A ems.celery worker -l info --pool=solo]
-
-# START CELERY BEAT
-"celery -A app beat -l info"
-e.g: [celery -A ems beat -l info]

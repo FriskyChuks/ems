@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import *
+from .models import *
 
 def home(request):
 	return render(request,'home/index.html',{})

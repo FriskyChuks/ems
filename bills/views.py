@@ -1,4 +1,4 @@
-from turtle import delay
+# from turtle import delay
 from unicodedata import name
 from django.shortcuts import redirect, render, HttpResponse
 from .task import create_bills_for_all

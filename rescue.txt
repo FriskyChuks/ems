@@ -1,0 +1,5 @@
+# START CELERY WORKER
+celery -A <app_name> worker -l info --pool=solo
+
+# START CELERY BEAT
+celery -A <app_name> beat -l info

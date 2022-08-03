@@ -10,4 +10,5 @@ urlpatterns=[
     path('payment/<bill_id>/',views.payment_view,name='payment'),
     path('pending_bills/',views.pending_bills_view, name='pending_bills'),
     path('pending_bills_detail/<user>/',views.pending_bills_detail_view,name='pending_bills_detail'),
+    path('load_wallet/<user_id>/',views.load_wallet_view, name='load_wallet'),
 ]

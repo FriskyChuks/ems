@@ -1,0 +1,92 @@
+{% extends "layouts/base.html" %}
+{% load mathfilters %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Load Wallet</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#!">Tables</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:">Basic Tables</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                                <div class="row">
+                                  <div class="col-sm-12">  
+                                    <div class="card">
+                                      <div class="card-header">
+                                        <h5>{{user.first_name}} {{user.last_name}} || ({{user.email}})</h5>
+                                        <h5 style="float: right;">Account balance: <span style="color: Green;"><b><u> N{{account_balance}}</u></b></span></h5>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div id="extraControls" class="hidden">
+                                          <br>
+                                          <form action="" method="POST">{% csrf_token %}
+                                            <div class="col-md-12">
+                                                <label for="validationCustom02" class="form-label">Amount to Deposit (N)</label>
+                                                <input type="number" min="1" name="amount" class="form-control" id="validationCustom02" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div><br>
+                                            <div class="col-12">
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                                  <label class="form-check-label" for="invalidCheck">
+                                                    I'm sure of this action!
+                                                  </label>
+                                                  <div class="invalid-feedback">
+                                                    Please agree before proceeding.
+                                                  </div>
+                                                </div>
+                                            </div> <br>
+                                            <div class="col-12"></div>
+                                            <div class="col-12">
+                                                <button class="btn btn-success" type="submit">Load Wallet</button>
+                                            </div>
+                                          </form>
+                            
+                                          <div class="card-header">
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

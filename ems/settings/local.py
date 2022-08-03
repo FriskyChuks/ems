@@ -35,8 +35,7 @@ INSTALLED_APPS = [
 
     'django_celery_results',
     'django_celery_beat',
-
-    # 'django_q',
+    'django_apscheduler',# Perform tasks regularly
 ]
 
 MIDDLEWARE = [

@@ -70,7 +70,6 @@ def register_user(request):
 	return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
 
 
-
 def logout_view(request):
 	logout(request)
 	# messages.success(request, "Sad to see you leave! See you soon please!")

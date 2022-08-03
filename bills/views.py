@@ -1,8 +1,9 @@
-# from turtle import delay
+from django.contrib import messages
 from multiprocessing import context
 from unicodedata import name
 from django.shortcuts import redirect, render, HttpResponse
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 
 from .task import create_bills_for_all
 from apartments.models import *
@@ -45,29 +46,48 @@ def create_monthly_bills(request):
 
 def pending_bills_view(request):
     bills=Bill.objects.filter(status='billed').order_by().values(
-            "user__email","user","amount_due").annotate(n=models.Count("pk"))
+            "occupant__email","occupant","amount_due").annotate(n=models.Count("pk"))
     context={"bills":bills}
     return render(request,'bills/pending_bills.html',context)
 
 def pending_bills_detail_view(request,user):
     occupant = User.objects.get(id=user)
-    bills=Bill.objects.filter(status='billed',user=user)
+    bills=Bill.objects.filter(status='billed',occupant=user)
     context={"bills":bills,"occupant":occupant}
     return render(request,'bills/pending_bills_detail.html',context)
 
 
+@login_required(login_url="login")
 def payment_view(request,bill_id):
+    user=request.user.id
     bill = Bill.objects.get(id=bill_id)
-    payment_obj = Payment.objects.create(amount_paid=bill.amount_due,action='receipt',
-                                user_id=bill.user.id,created_by=request.user)
-    if payment_obj:
-        payment_obj
-        obj = PaymentDetail.objects.create(
-                bill_id         = bill.id,
-                payment_id      = payment_obj.id
-            )
-        obj.save()
-        Bill.objects.filter(id=bill.id).update(status="paid")
+    account_balance = Wallet.objects.get(occupant_id=bill.occupant.id).account_balance
+    print(account_balance)
+    if (bill.occupant.id!=user and float(account_balance) <= float(bill.amount_due)):
+        messages.error(request, "Account balance is too low, please top-up!")
+    else:
+        payment_obj = Payment.objects.create(amount_paid=bill.amount_due,action='receipt',
+                                occupant_id=bill.occupant.id,created_by=request.user)
+        if payment_obj:
+            payment_obj
+            PaymentDetail.objects.create(bill_id= bill.id,payment_id= payment_obj.id)
+            Bill.objects.filter(id=bill.id).update(status="paid")
+            messages.success(request, "Payment updated successfully!")
 
-    return redirect('pending_bills_detail',user=bill.user.id)
+    return redirect('pending_bills_detail',user=bill.occupant.id)
 
+
+def load_wallet_view(request,user_id):
+    user=User.objects.get(id=user_id)
+    account_balance = Wallet.objects.get(occupant_id=user_id).account_balance
+    deposit_amount = request.POST.get('amount')
+    if request.method=='POST':   
+        new_balance = float(account_balance) + float(deposit_amount)
+        Wallet.objects.filter(occupant_id=user_id).update(account_balance=new_balance)
+        Payment.objects.create(amount_paid=deposit_amount,
+                action='deposit',occupant_id=user_id,created_by_id=request.user.id
+        )
+        messages.success(request, "Wallet loaded successfully!")
+        return redirect("load_wallet",user_id)
+    context={"user":user,"account_balance":account_balance}
+    return render(request,'bills/load_wallet.html',context)

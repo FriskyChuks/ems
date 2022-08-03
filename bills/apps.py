@@ -7,3 +7,5 @@ class BillsConfig(AppConfig):
 
     def ready(self):
         import bills.signals
+        from .automated_jobs import updater
+        updater.start()

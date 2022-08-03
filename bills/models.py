@@ -16,7 +16,7 @@ PAY_ACTION = (
 
 
 class Bill(models.Model):
-    user                = models.ForeignKey(User, on_delete=models.CASCADE)
+    occupant                = models.ForeignKey(User, on_delete=models.CASCADE)
     billed_for          = models.ForeignKey(Apartment,on_delete=models.CASCADE)
     amount_due          = models.DecimalField(decimal_places=2, default='00.00', max_digits=20)
     status              = models.CharField(max_length=10, choices=BILL_STATUS, default='billed')
@@ -30,7 +30,7 @@ class Bill(models.Model):
 class Payment(models.Model):
     amount_paid     = models.DecimalField(decimal_places=2, default='00.00', max_digits=20)
     action          = models.CharField(max_length=20, choices=PAY_ACTION)
-    user            = models.ForeignKey(User, on_delete=models.CASCADE)
+    occupant        = models.ForeignKey(User, on_delete=models.CASCADE)
     created_by      = models.ForeignKey(User,related_name='created_by',on_delete=models.CASCADE, null=True, blank=True)
     date_created    = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -48,14 +48,14 @@ class PaymentDetail(models.Model):
         
 
 class Wallet(models.Model):
-    resident        = models.OneToOneField(User,related_name='resident', on_delete=models.CASCADE, null=True, blank=True)
+    occupant        = models.OneToOneField(User,related_name='resident', on_delete=models.CASCADE, null=True, blank=True)
     account_balance = models.DecimalField(decimal_places=2, default='00.00', max_digits=20)
     created_by      = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     date_created    = models.DateTimeField(auto_now_add=False, auto_now=True)
     last_updated    = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     def __str__(self):
-        return f"N{self.account_balance} || {self.resident.email}"
+        return f"N{self.account_balance} || {self.occupant.email}"
 
 
 

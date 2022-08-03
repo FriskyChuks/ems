@@ -57,9 +57,9 @@
                                                         {% for bill in bills %}
                                                         <tr>
                                                             <th>{{ forloop.counter }}</th>
-                                                            <td>{{bill.user__email}}</td>
+                                                            <td>{{bill.occupant__email}}</td>
                                                             <td style="text-align: right;">N{{ bill.n|mul:bill.amount_due }}</td>
-                                                            <td><a href="{% url 'pending_bills_detail' bill.user %}">Details</a></td>
+                                                            <td><a href="{% url 'pending_bills_detail' bill.occupant %}">Details</a></td>
                                                         </tr>
                                                         {% endfor %}
                                                     </tbody>

@@ -82,5 +82,5 @@ from .models import Bill, Wallet
 @receiver(post_save, sender=User)
 def post_save_create_wallet(sender, instance, created, **kwargs):
     if created:
-        Wallet.objects.create(resident_id=instance.id)
+        Wallet.objects.create(occupant_id=instance.id)
 

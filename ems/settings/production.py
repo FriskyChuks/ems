@@ -16,6 +16,8 @@ SECRET_KEY = 'django-insecure--%m*y^zof*ttu8w=y)4n%xrpkl#mn#2*-xhjho$87)s#ka5j(i
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+# ALLOWED_HOSTS = [‘0.0.0.0’, ‘localhost’]
+
 
 # Application definition
 
@@ -148,7 +150,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-    # STATIC_DIR,
+    STATIC_DIR,
 )
 
 from django.contrib.messages import constants as messages

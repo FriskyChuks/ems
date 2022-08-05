@@ -1,1 +1,1 @@
-web: gunicorn ems.wsgi --log-file -
+web: gunicorn ems.wsgi 

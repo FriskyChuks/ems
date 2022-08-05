@@ -16,7 +16,7 @@ PAY_ACTION = (
 
 
 class Bill(models.Model):
-    occupant                = models.ForeignKey(User, on_delete=models.CASCADE)
+    occupant            = models.ForeignKey(User, on_delete=models.CASCADE)
     billed_for          = models.ForeignKey(Apartment,on_delete=models.CASCADE)
     amount_due          = models.DecimalField(decimal_places=2, default='00.00', max_digits=20)
     status              = models.CharField(max_length=10, choices=BILL_STATUS, default='billed')
@@ -24,7 +24,7 @@ class Bill(models.Model):
     last_updated        = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     def __str__(self):
-        return f"{self.billed_for}({self.amount_due}) || {self.user.email}"
+        return f"{self.billed_for}({self.amount_due}) || {self.occupant.email}"
 
 
 class Payment(models.Model):

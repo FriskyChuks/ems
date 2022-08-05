@@ -30,7 +30,7 @@ def create_apartment_view(request):
 						created_by_id=request.user.id)
 		obj.save()
 		messages.success(request,'Apartment created sucessfully!')
-		return redirect('create_apartment')
+		return redirect('apartment_list')
 	return render(request,'apartments/create_apartment.html',context)
 
 

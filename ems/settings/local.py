@@ -13,14 +13,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = 'django-insecure--%m*y^zof*ttu8w=y)4n%xrpkl#mn#2*-xhjho$87)s#ka5j(i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -51,7 +51,7 @@ MIDDLEWARE = [
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-WHITENOISE_USE_FINDERS = False
+# WHITENOISE_USE_FINDERS = False
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -155,7 +155,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-    STATIC_DIR,
+    # STATIC_DIR,
 )
 
 from django.contrib.messages import constants as messages
@@ -191,4 +191,13 @@ EMAIL_HOST_PASSWORD = 'wurgbilxriheiwdd'
 DEFAULT_FROM_EMAIL = '<goodfriends.gfb@gmail.com>'
  
 
-# wurgbilxriheiwdd
+# PREPARE FOR HTTP
+CORS_REPLACE_HTTPS_REFERER      = False
+HOST_SCHEME                     = "http://"
+SECURE_PROXY_SSL_HEADER         = None
+SECURE_SSL_REDIRECT             = False
+SESSION_COOKIE_SECURE           = False
+CSRF_COOKIE_SECURE              = False
+SECURE_HSTS_SECONDS             = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
+SECURE_FRAME_DENY               = False

@@ -77,6 +77,7 @@ def payment_view(request,bill_id):
     return redirect('pending_bills_detail',user=bill.occupant.id)
 
 
+@login_required(login_url="login")
 def load_wallet_view(request,user_id):
     user=User.objects.get(id=user_id)
     account_balance = Wallet.objects.get(occupant_id=user_id).account_balance

@@ -20,7 +20,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,13 +36,11 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'django_apscheduler',# Perform tasks regularly
-
-    # 'django_q',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -51,9 +49,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-WHITENOISE_USE_FINDERS = False
+# WHITENOISE_USE_FINDERS = False
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -92,23 +90,23 @@ WSGI_APPLICATION = 'ems.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ems',
-        'USER': 'chuks',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'ems',
+#         'USER': 'chuks',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
@@ -157,7 +155,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-    STATIC_DIR,
+    # STATIC_DIR,
 )
 
 from django.contrib.messages import constants as messages
@@ -193,4 +191,13 @@ EMAIL_HOST_PASSWORD = 'wurgbilxriheiwdd'
 DEFAULT_FROM_EMAIL = '<goodfriends.gfb@gmail.com>'
  
 
-# wurgbilxriheiwdd
+# SETTINGS FOR HTTPS--SECURITY
+CORS_REPLACE_HTTPS_REFERER      = True
+HOST_SCHEME                     = "https://"
+SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT             = True
+SESSION_COOKIE_SECURE           = True
+CSRF_COOKIE_SECURE              = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
+SECURE_HSTS_SECONDS             = 1000000
+SECURE_FRAME_DENY               = True

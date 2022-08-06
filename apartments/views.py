@@ -1,4 +1,5 @@
 from email import message
+from multiprocessing import context
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
@@ -7,9 +8,16 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 
+from apartments.quick_stats import *
+
 
 def home(request):
-	return render(request,'home/index.html',{})
+	pending_revenue = expected_monthly_revenue() - amount_received()
+
+	context={"expected_monthly_revenue":expected_monthly_revenue,
+		"amount_received":amount_received,"pending_revenue":pending_revenue
+	}
+	return render(request,'home/index.html',context)
 
 
 def create_apartment_view(request):

@@ -43,6 +43,7 @@
                                                 <!-- <button>See All</button> <button>Free Apartments</button><button>Assigned Apartments</button> -->
                                             </span>
                                         </div>
+                                        <div class="table table-responsive">
                                         <div class="card-block table-border-style">
                                             <div class="col-xl-12 col-md-12 m-b-30">
                                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -95,43 +96,15 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="all" role="tabpanel"
                                                             aria-labelledby="all-tab">
-                                                        <table class="table table-hover">
-                                                            {% include 'apartments/snippets/apartment_list_template.html' with instances=with instances=apartments %}
-                                                        </table>
+                                                        <div class="table table-responsive">
+                                                            <table class="table table-hover">
+                                                                {% include 'apartments/snippets/apartment_list_template.html' with instances=with instances=apartments %}
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <!-- <div class="table-responsive">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>TITLE</th>
-                                                            <th>CATEGORY</th>
-                                                            <th>PHASE</th>
-                                                            <th>STREE</th>
-                                                            <th>COMPOUND</th>
-                                                            <th>FLAT NO</th>
-                                                            <th>ACTIONS</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {% for apartment in apartments %}
-                                                        <tr>
-                                                            <td>{{ forloop.counter }}</td>
-                                                            <td>{{apartment.apartment_type.title}}</td>
-                                                            <td>{{apartment.apartment_category|capfirst}}</td>
-                                                            <td>{{apartment.phase}}</td>
-                                                            <td>{{apartment.street.title}}</td>
-                                                            <td>{{apartment.compound}}</td>
-                                                            <td>{{apartment.flat_number}}</td>
-                                                            <td><a href="">Assign</a></td>
-                                                        </tr>
-                                                        {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                            </div> -->
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

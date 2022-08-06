@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mathfilters',
+    'django.contrib.humanize',
 
     'accounts',
     'bills',
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_apscheduler',# Perform tasks regularly
 ]
+
+USE_THOUSAND_SEPARATOR = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

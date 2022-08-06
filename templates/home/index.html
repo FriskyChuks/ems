@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %}
-
+{% load mathfilters %}
 {% block title %} Dashboard {% endblock %} 
 
 {% load static %}
@@ -28,15 +28,15 @@
                                         <div class="card-block">
                                             <h6 class="mb-4">Expected Monthly Revenue</h6>
                                             <div class="row d-flex align-items-center">
-                                                <div class="col-9">
+                                                <div class="col-12">
                                                     <h3 class="f-w-300 d-flex align-items-center m-b-0"><i
                                                             class="feather icon-arrow-down text-c-green f-30 m-r-10"></i>N
-                                                        249.95</h3>
+                                                        {{expected_monthly_revenue}}0</h3>
                                                 </div>
 
-                                                <div class="col-3 text-right">
+                                                <!-- <div class="col-3 text-right">
                                                     <p class="m-b-0">67%</p>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="progress m-t-30" style="height: 7px;">
                                                 <div class="progress-bar progress-c-theme" role="progressbar"
@@ -53,14 +53,14 @@
                                         <div class="card-block">
                                             <h6 class="mb-4">Amount Received</h6>
                                             <div class="row d-flex align-items-center">
-                                                <div class="col-9">
+                                                <div class="col-12">
                                                     <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
                                                             class="feather icon-arrow-down text-c-green f-30 m-r-10"></i>N
-                                                        2.942.32</h3>
+                                                            {{amount_received}}</h3>
                                                 </div>
-                                                <div class="col-3 text-right">
+                                                <!-- <div class="col-3 text-right">
                                                     <p class="m-b-0">36%</p>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="progress m-t-30" style="height: 7px;">
                                                 <div class="progress-bar progress-c-theme2" role="progressbar"
@@ -77,14 +77,14 @@
                                         <div class="card-block">
                                             <h6 class="mb-4">Pending Revenue</h6>
                                             <div class="row d-flex align-items-center">
-                                                <div class="col-9">
+                                                <div class="col-12">
                                                     <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
                                                             class="feather icon-arrow-up text-c-red f-30 m-r-10"></i>N
-                                                        8.638.32</h3>
+                                                        {{pending_revenue}}</h3>
                                                 </div>
-                                                <div class="col-3 text-right">
+                                                <!-- <div class="col-3 text-right">
                                                     <p class="m-b-0">80%</p>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="progress m-t-30" style="height: 7px;">
                                                 <div class="progress-bar progress-c-theme" role="progressbar"

@@ -1,13 +1,14 @@
 from django.utils import timezone
 
-from bills.models import Payment
+from bills.models import Bill, Payment
 from .models import *
 
 def expected_monthly_revenue():
     income = 0.00
-    rented_apartments = Apartment.objects.filter(status='taken')
-    for apartment in rented_apartments:
-        price = apartment.apartment_type.price
+    bills = Bill.objects.filter(date_created__gte=timezone.now().replace(
+                                day=1, hour=0, minute=0, second=0, microsecond=0))
+    for bill in bills:
+        price = bill.amount_due
         income += float(price)
     return income
 

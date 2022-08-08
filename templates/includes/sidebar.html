@@ -34,7 +34,9 @@
                     <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span
                             class="pcoded-mtext">Manage Apartments</span></a>
                     <ul class="pcoded-submenu">
-                        <li class=""><a href="{% url 'create_apartment' %}" class="">Create Apartment</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li class=""><a href="{% url 'create_apartment' %}" class="">Create Apartment</a></li>
+                        {% endif %}
                         <li class=""><a href="{% url 'apartment_list' %}" class="">Apartment List</a></li>
                         <!-- <li class=""><a href="/bc_breadcrumb-pagination.html" class="">Breadcrumb & paggination</a></li>
                         <li class=""><a href="/bc_collapse.html" class="">Collapse</a></li>
@@ -53,9 +55,8 @@
                     <ul class="pcoded-submenu">
                         {% if request.user.is_authenticated %}
                             <li class=""><a href="{% url 'load_wallet' request.user.id %}" class="">Load Wallet</a></li>
+                            <li class=""><a href="{% url 'pending_bills' %}" class="">Pending Bills</a></li>
                         {% endif %}
-                        <!-- <li class=""><a href="{% url 'apartment_list' %}" class="">Apartment List</a></li> -->
-                        <li class=""><a href="{% url 'pending_bills' %}" class="">Pending Bills</a></li>
                         <!-- <li class=""><a href="/bc_breadcrumb-pagination.html" class="">Breadcrumb & paggination</a></li>
                         <li class=""><a href="/bc_collapse.html" class="">Collapse</a></li>
                         <li class=""><a href="/bc_tabs.html" class="">Tabs & pills</a></li>

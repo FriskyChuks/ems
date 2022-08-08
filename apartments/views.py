@@ -61,8 +61,7 @@ def add_occupant_view(request,id):
 	if request.method=='POST':
 		try:
 			user=User.objects.get(email=email)
-			obj=Occupant.objects.create(occupant_id=user.id,apartment_id=id,
-										assigned_by_id=request.user.id)
+			obj=Occupant.objects.create(occupant_id=user.id,apartment_id=id)
 			obj.save()
 			Apartment.objects.filter(id=id).update(status='taken')
 			messages.success(request,f"Apartment successfully assigned to {email}")

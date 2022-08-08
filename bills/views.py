@@ -53,26 +53,27 @@ def pending_bills_view(request):
 def pending_bills_detail_view(request,user):
     occupant = User.objects.get(id=user)
     bills=Bill.objects.filter(status='billed',occupant=user)
-    context={"bills":bills,"occupant":occupant}
+    account_balance = Wallet.objects.get(occupant_id=user).account_balance
+    context={"bills":bills,"occupant":occupant,"account_balance":account_balance}
     return render(request,'bills/pending_bills_detail.html',context)
 
 
 @login_required(login_url="login")
 def payment_view(request,bill_id):
-    user=request.user.id
     bill = Bill.objects.get(id=bill_id)
     account_balance = Wallet.objects.get(occupant_id=bill.occupant.id).account_balance
-    print(account_balance)
-    if (bill.occupant.id!=user and float(account_balance) <= float(bill.amount_due)):
+    if (float(account_balance) <= float(bill.amount_due)):
         messages.error(request, "Account balance is too low, please top-up!")
+        return redirect('pending_bills_detail',user=bill.occupant.id)
     else:
         payment_obj = Payment.objects.create(amount_paid=bill.amount_due,action='receipt',
                                 occupant_id=bill.occupant.id,created_by=request.user)
-        if payment_obj:
-            payment_obj
-            PaymentDetail.objects.create(bill_id= bill.id,payment_id= payment_obj.id)
-            Bill.objects.filter(id=bill.id).update(status="paid")
-            messages.success(request, "Payment updated successfully!")
+        # if payment_obj:
+        account_balance = float(account_balance) - float(bill.amount_due)
+        Wallet.objects.filter(occupant_id=bill.occupant.id).update(account_balance=account_balance)
+        PaymentDetail.objects.create(bill_id= bill.id,payment_id= payment_obj.id)
+        Bill.objects.filter(id=bill.id).update(status="paid")
+        messages.success(request, "Payment updated successfully!")
 
     return redirect('pending_bills_detail',user=bill.occupant.id)
 

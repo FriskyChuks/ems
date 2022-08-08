@@ -48,7 +48,7 @@ class Apartment(models.Model):
 class Occupant(models.Model):
     occupant = models.ForeignKey(User,on_delete=models.CASCADE)
     apartment = models.ForeignKey(Apartment,on_delete=models.CASCADE)
-    assigned_by = models.ForeignKey(User,related_name='assigned_by', on_delete=models.CASCADE)
+    # assigned_by = models.ForeignKey(User,related_name='assigned_by', on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.occupant.email} || {self.apartment}"
